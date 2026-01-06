@@ -1,11 +1,21 @@
 import {test} from '@playwright/test'
 
-test.describe('test suite one', () => {
-  test('the first test', async ({page}) => {
-    await page.goto('http://localhost:4200/pages/iot-dashboard')
+
+
+test.describe('can test the "Forms" section', () => {
+
+  test.beforeEach(async ({page}) => {
+    await page.goto('http://localhost:4200/')
 
     await page.getByText("Forms").click();
+  })
+
+  test('can navigate to the "Form Layouts" page', async ({page}) => {
     await page.getByText("Form Layouts").click();
+  })
+
+  test('can navigate to the "Datepicker" page', async ({page}) => {
+    await page.getByText("Datepicker").click();
   })
 })
 
