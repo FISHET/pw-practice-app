@@ -98,4 +98,44 @@ test.describe('can test the "Forms Layouts" page', () => {
       .nth(3)
       .click();
   })
+
+  test('locating parent elements', async ({page}) => {
+
+    // use locator option argument
+    await page
+      .locator('nb-card', {hasText: "Using the Grid"})
+      .getByRole('textbox', {name: "Email"})
+      .click();
+
+    await page
+      .locator('nb-card', {has: page.locator('#inputEmail1')})
+      .getByRole('textbox', {name: "Email"})
+      .click();
+
+    // use filter
+    await page
+      .locator('nb-card')
+      .filter({hasText: "Basic form"})
+      .getByRole('textbox', {name: "Email"})
+      .click();
+
+    await page
+      .locator('nb-card')
+      .filter({has: page.locator('.status-danger')})
+      .getByRole('textbox', {name: "Password"})
+      .click();
+
+    await page.locator('nb-card')
+      .filter({has: page.locator('nb-checkbox')}) // returns 3
+      .filter({hasText: "Sign in"}) // returns one
+      .getByRole('textbox', {name: "Email"})
+      .click();
+
+    // by xPath
+    await page.locator(':text-is("Using the Grid")')
+      .locator('..')
+      .getByRole('textbox', {name: "Email"})
+      .click();
+
+  })
 })
