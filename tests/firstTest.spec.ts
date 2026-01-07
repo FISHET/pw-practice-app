@@ -53,4 +53,49 @@ test.describe('can test the "Forms Layouts" page', () => {
     page.locator(':text-is("Using the Grid")')
 
   })
+
+  test('can grab items using user-facing locators', async ({page}) => {
+    // by role
+    await page.getByRole('textbox', {name: "Email"}).first().click();
+    await page.getByRole('button', {name: "SIGN IN"}).first().click();
+
+    // by label
+    await page.getByLabel('Email').first().click();
+
+    // by placeholder
+    await page.getByPlaceholder('Jane Doe').click();
+
+    // by text
+    await page.getByText('Using the Grid').click();
+
+    // by Test ID (sometimes considered a best practice, as adds stability, but is not really user-facing, so bear that in mind
+    await page.getByTestId('SignIn').click();
+
+    // by title
+    await page.getByTitle('IoT Dashboard').click();
+  })
+
+  test('can test child elements', async ({page}) => {
+    // combine locator operators
+    await page.locator('nb-card nb-radio :text-is("Option 1")').click();
+
+    // or, chain
+    await page
+      .locator('nb-card')
+      .locator('nb-radio')
+      .locator(':text-is("Option 2")')
+      .click();
+
+    // you can also chain different types of locators
+    await page
+      .locator('nb-card')
+      .getByRole('button', {name: "SIGN IN"})
+      .first().click();
+
+    // you can pull out a particular entry from all returned results - however this can be flakey if the app is still under development
+    await page
+      .locator('nb-card')
+      .nth(3)
+      .click();
+  })
 })
