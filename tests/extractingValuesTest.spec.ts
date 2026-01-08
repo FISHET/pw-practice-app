@@ -12,7 +12,7 @@ test.describe('Can extract values', () => {
 
    basicForm = page
       .locator('nb-card')
-      .filter({hasText: "Basic form"})
+      .filter({hasText: "Basic form"});
 
     emailField = basicForm.getByRole('textbox', {name: "Email"});
   })
