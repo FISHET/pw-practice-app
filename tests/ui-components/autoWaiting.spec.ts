@@ -1,5 +1,4 @@
 import {expect, Locator, test} from '@playwright/test'
-import {state} from "@angular/animations";
 
 test.describe('Can use auto-waits', () => {
 
@@ -55,6 +54,4 @@ test.describe('Can use auto-waits', () => {
     const successButtonText = await successButton.allTextContents();
     expect(successButtonText).toContain("Data loaded with AJAX get request.");
   });
-
-
 });
